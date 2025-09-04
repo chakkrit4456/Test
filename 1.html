@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รูปแบบการเชื่อมต่อ - Network Classroom</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #7209b7;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f5f7ff;
+            color: var(--gray-800);
+            line-height: 1.6;
+        }
+
+        /* Navigation Styles */
+        nav {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.8rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.4rem;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-brand i {
+            margin-right: 0.5rem;
+            font-size: 1.6rem;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.2rem;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: white;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        /* Main Content Styles */
+        .page-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .page-header {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            border-left: 5px solid var(--primary);
+        }
+
+        .page-header h1 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 2.2rem;
+        }
+
+        .page-header p {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Connection Types Grid */
+        .connection-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .type {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .type:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .type-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .type-header h2 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .type-content {
+            padding: 2rem;
+        }
+
+        .type-content p {
+            margin-bottom: 1.2rem;
+            color: var(--gray-700);
+        }
+
+        .type-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px solid var(--gray-200);
+        }
+
+        /* Next Page Button */
+        .next-page-section {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .next-page-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .next-page-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .page-header { animation-delay: 0.1s; }
+        .connection-types .type:nth-child(1) { animation-delay: 0.2s; }
+        .connection-types .type:nth-child(2) { animation-delay: 0.3s; }
+        .next-page-section { animation-delay: 0.4s; }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .connection-types {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--primary);
+                padding: 1rem;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.show {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+            
+            .page-header {
+                padding: 1.5rem;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .connection-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .type-content {
+                padding: 1.5rem;
+            }
+            
+            .page-container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="home.html" class="nav-brand">
+                <i class="fas fa-network-wired"></i>
+                <span>Network</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="1.html" class="active">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="2.html">ประเภทเครือข่าย</a></li>
+                <li><a href="3.html">อินทราเน็ต, และเอกซ์ทราเน็ต</a></li>
+                <li><a href="4.html">IEEE 802</a></li>
+                <li><a href="5.html">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="6.html">ความเสียหาย</a></li>
+            </ul>
+        </div>
+     </nav>
+    <main class="page-container">
+        <header class="page-header animate">
+            <h1>รูปแบบการเชื่อมต่อเพื่อใช้บริการระบบเครือข่ายคอมพิวเตอร์</h1>
+            <p>
+                เครือข่ายคอมพิวเตอร์มีโครงสร้างพื้นฐานหลัก 2 แบบ ได้แก่ เครือข่ายแบบ ไคลเอนต์-เซิร์ฟเวอร์ (Client-Server) และ เครือข่ายแบบเพียร์ทูเพียร์ (Peer-to-Peer).
+            </p>
+        </header>
+
+        <div class="connection-types">
+            <article class="type animate">
+                <div class="type-header">
+                    <div class="card-icon"><i class="fas fa-server"></i></div>
+                    <h2>1. เครือข่ายแบบไคลเอนต์/เซิร์ฟเวอร์ (Client-Server)</h2>
+                </div>
+                <div class="type-content">
+                    <p>
+                        ไคลเอนต์ (Client) คือ เครื่องคอมพิวเตอร์ที่ไปร้องขอบริการและรับบริการอย่างใดอย่างหนึ่งจากเซิร์ฟเวอร์
+                        เครื่องเซิฟเวอร์(Server) คือ เครื่องคอมพิวเตอร์ที่ทำหน้าที่ให้บริการอย่างใดอย่างหนึ่งหรือหลายอย่าง โดยให้บริการทรัพยากรเครื่องให้กับเครื่องไคลเอนต์ เช่น บริการไฟล์(File Server) คือการที่เครื่องเซิร์ฟเวอร์ให้แฟ้มข้อมูลแก่เครื่องไคลเอนต์ เป็นต้น
+                    </p>
+                    <p>เป็นรูปแบบที่นิยมมากที่สุด มีเครื่องคอมพิวเตอร์หลักที่ทรงพลังทำหน้าที่เป็น "ผู้ให้บริการ" (Server) คอยจัดเก็บข้อมูลและให้บริการต่างๆ และมีเครื่องคอมพิวเตอร์อื่นๆ ที่เป็น "ผู้ใช้บริการ" (Client) เข้ามาขอใช้บริการจากเซิร์ฟเวอร์</p>
+                    <p>
+                        เครื่องเซิฟเวอร์อาจเป็นเครื่องที่มีสมรรถภาพสูงหรือเครื่องทั่วไปก็ได้ขึ้นอยู่กับการใช้งาน โดยส่วนใหญ่เครื่องเซิฟเวอร์มักถูกออกแบบให้มีสมรรถนะสูง เพื่อรองรับความทนทานต่อการผิดพลาด และมีระบบสำรองต่างๆ
+                    </p>
+                    <p>
+                        ในปัจจุบันนิยมใช้เซิร์ฟเวอร์หลายๆเครื่องทำงานร่วมกัน (Cloud Computing) เพื่อรองรับผู้ใช้งานจำนวนมากและเพิ่มประสิทธิภาพ เช่น เซิร์ฟเวอร์ของ YouTube หรือ Facebook เป็นต้น
+                    </p>
+                    <img src="img/The-Client-Server-Paradigm.png" alt="ภาพประกอบรูปแบบ Client-Server" class="type-image">
+                </div>
+            </article>
+
+            <article class="type animate">
+                <div class="type-header">
+                    <div class="card-icon"><i class="fas fa-users"></i></div>
+                    <h2>2. แบบเพียร์ทูเพียร์ (Peer-to-Peer: P2P)</h2>
+                </div>
+                <div class="type-content">
+                    <p>เป็นระบบเครือข่ายขนาดเล็กที่อยู่ในกลุ่มเดียวกันที่เรียกอีกอย่างว่า Workgroup โดยเครื่องคอมพิวเตอร์ทุกเครื่องมีสิทธิ์เท่าเทียมกัน นิยมใช้ในงานทั่วไปในสำนักงานขนาดเล็กเนื่องจากมีราคาถูก ส่วนมากใช้นิยมแชร์ไฟล์และแชร์สู่เครื่องพิมพ์</p>
+                    <p>เครือข่ายแบบนี้จะเก็บไฟล์และการเชื่อมต่ออุปกรณ์ต่างๆ ไว้ที่เครื่องคอมพิวเตอร์ของผู้ใช้แต่ละคนโดยไม่มีคอมพิวเตอร์ส่วนกลางที่ทำหน้าที่นี้</p>
+                    <img src="./img/peer-to-peer-network.jpg" alt="ภาพประกอบรูปแบบ Peer-to-Peer" class="type-image">
+                </div>
+            </article>
+        </div>
+
+        <section class="next-page-section animate">
+            <a href="2.html" class="next-page-btn">เรียนรู้หัวข้อถัดไป →</a>
+        </section>
+    </main>
+    <script>
+        // Toggle mobile navigation
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('show');
+        });
+        
+        // Add animation to elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animate');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = entry.target.style.animationDelay || '0s';
+                        entry.target.style.animation = `fadeInUp 0.6s ease ${delay} forwards`;
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

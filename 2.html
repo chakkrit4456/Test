@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ประเภทเครือข่าย - Network Classroom</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #7209b7;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f5f7ff;
+            color: var(--gray-800);
+            line-height: 1.6;
+        }
+
+        /* Navigation Styles */
+        nav {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.8rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.4rem;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-brand i {
+            margin-right: 0.5rem;
+            font-size: 1.6rem;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.2rem;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: white;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        /* Main Content Styles */
+        .page-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .page-header {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            border-left: 5px solid var(--primary);
+        }
+
+        .page-header h1 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 2.2rem;
+        }
+
+        .page-header p {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .intro-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-top: 1.5rem;
+        }
+
+        /* Network Grid Styles */
+        .network-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .network-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .network-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+        }
+
+        #pan .card-header { background: linear-gradient(45deg, #6e45e2, #88d3ce); }
+        #lan .card-header { background: linear-gradient(45deg, #1d976c, #93f9b9); }
+        #man .card-header { background: linear-gradient(45deg, #ff9a9e, #fad0c4); }
+        #wan .card-header { background: linear-gradient(45deg, #007bff, #00c6ff); }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .network-card h2 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .network-card p {
+            margin-bottom: 1.2rem;
+            color: var(--gray-700);
+            flex-grow: 1;
+        }
+
+        .network-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+            text-align: left;
+        }
+
+        .network-card ul li {
+            padding-left: 1.8rem;
+            position: relative;
+            margin-bottom: 0.8rem;
+            color: var(--gray-700);
+        }
+
+        .network-card ul li::before {
+            content: '✓';
+            color: #28a745;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Next Page Button */
+        .next-page-section {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .next-page-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .next-page-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            opacity: 0;
+        }
+
+        .page-header { animation: fadeInUp 0.6s ease 0.1s forwards; }
+        .network-grid .network-card:nth-child(1) { animation: fadeInUp 0.6s ease 0.2s forwards; }
+        .network-grid .network-card:nth-child(2) { animation: fadeInUp 0.6s ease 0.3s forwards; }
+        .network-grid .network-card:nth-child(3) { animation: fadeInUp 0.6s ease 0.4s forwards; }
+        .network-grid .network-card:nth-child(4) { animation: fadeInUp 0.6s ease 0.5s forwards; }
+        .next-page-section { animation: fadeInUp 0.6s ease 0.6s forwards; }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .network-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--primary);
+                padding: 1rem;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.show {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+            
+            .page-header {
+                padding: 1.5rem;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .network-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .card-content {
+                padding: 1.5rem;
+            }
+            
+            .page-container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="home.html" class="nav-brand">
+                <i class="fas fa-network-wired"></i>
+                <span>Network</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="1.html">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="2.html" class="active">ประเภทเครือข่าย</a></li>
+                <li><a href="3.html">อินทราเน็ต, และเอกซ์ทราเน็ต</a></li>
+                <li><a href="4.html">IEEE 802</a></li>
+                <li><a href="5.html">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="6.html">ความเสียหาย</a></li>
+            </ul>
+        </div>
+     </nav>
+     <main class="page-container">
+        <header class="page-header">
+            <h1>ประเภทของระบบเครือข่าย</h1>
+            <p>แบ่งตามขนาดพื้นที่ทางภูมิศาสตร์ที่เครือข่ายครอบคลุม</p>
+            <img src="./img/PAN-LAN.jpg" alt="แผนภาพเปรียบเทียบขนาดเครือข่าย PAN, LAN, CAN, MAN, และ WAN" class="intro-image">
+        </header>
+
+        <div class="network-grid">
+            <article id="pan" class="network-card animate">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-bluetooth-b"></i></div>
+                    <h2>เครือข่ายส่วนบุคคล (Personal Area Network หรือ PAN)</h2>
+                </div>
+                <div class="card-content">
+                    <p>เครือข่ายส่วนบุคคล (PAN) คือ เครือข่ายคอมพิวเตอร์ขนาดเล็กที่ออกแบบมาเพื่อการเชื่อมต่ออุปกรณ์อิเล็กทรอนิกส์ต่าง ๆ รอบตัวบุคคลในระยะใกล้ โดยทั่วไปมักครอบคลุมรัศมีประมาณ 1–10 เมตร เหมาะสำหรับการใช้งานส่วนบุคคล เช่น การเชื่อมต่อระหว่างสมาร์ตโฟน แล็ปท็อป แท็บเล็ต หูฟังไร้สาย เครื่องพิมพ์ หรืออุปกรณ์ IoT</p>
+                    <img src="./img/pan.jpg" alt="">
+                </div>
+            </article>
+
+            <article id="lan" class="network-card animate">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-wifi"></i></div>
+                    <h2>เครือข่ายท้องถิ่น (Local Area Network หรือ LAN)</h2>
+                </div>
+                <div class="card-content">
+                    <p>เครือข่ายท้องถิ่น (LAN) คือเครือข่ายคอมพิวเตอร์ที่ครอบคลุมพื้นที่ขนาดเล็กถึงปานกลาง เช่น อาคารสำนักงาน โรงเรียน มหาวิทยาลัย หรือที่พักอาศัย ใช้สำหรับเชื่อมต่ออุปกรณ์ต่าง ๆ ภายในพื้นที่เดียวกัน เพื่อให้สามารถสื่อสารและแลกเปลี่ยนข้อมูลกันได้อย่างรวดเร็ว</p>
+                    <img src="img/Home_LAN_local_area_network_example_diagram.png" alt="">
+                </div>
+            </article>
+
+            <article id="man" class="network-card animate">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-city"></i></div>
+                    <h2>เครือข่ายระดับเมือง (Metropolitan Area Networks หรือ MAN)</h2>
+                </div>
+                <div class="card-content">
+                    <p>เครือข่ายระดับเมือง (MAN) คือเครือข่ายคอมพิวเตอร์ที่ครอบคลุมพื้นที่ขนาดใหญ่กว่า LAN แต่เล็กกว่า WAN โดยมักครอบคลุมพื้นที่ระดับเมือง อำเภอ หรือจังหวัด มีระยะทางตั้งแต่หลายกิโลเมตรจนถึงร้อยกว่ากิโลเมตร ใช้เพื่อเชื่อมโยง หลาย ๆ LAN เข้าด้วยกัน เพื่อให้หน่วยงานหรือองค์กรในพื้นที่เดียวกันสามารถสื่อสารและแลกเปลี่ยนข้อมูลได้สะดวก</p>
+                    <img src="img/9e117601-92a0-492b-b91d-36560564662a.jpeg" alt="">
+                </div>
+            </article>
+
+            <article id="wan" class="network-card animate">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-globe-americas"></i></div>
+                    <h2>เครือข่ายวงกว้าง (Wide Area Network หรือ WAN)</h2>
+                </div>
+                <div class="card-content">
+                    <p>เครือข่ายวงกว้าง (WAN) คือเครือข่ายคอมพิวเตอร์ที่ครอบคลุมพื้นที่ขนาดใหญ่มาก ตั้งแต่ระดับประเทศ ทวีป ไปจนถึงทั่วโลก ใช้สำหรับเชื่อมโยงเครือข่าย LAN หรือ MAN หลาย ๆ เครือข่ายเข้าด้วยกัน โดยอาศัยผู้ให้บริการโทรคมนาคมและอินเทอร์เน็ตเป็นตัวกลาง"</p>
+                    <img src="img/lmw.jpg" alt="">
+                </div>
+            </article>
+        </div>
+
+        <section class="next-page-section animate">
+            <a href="3.html" class="next-page-btn">เรียนรู้หัวข้อถัดไป →</a>
+        </section>
+     </main>
+    <script>
+        // Toggle mobile navigation
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('show');
+        });
+        
+        // Add animation to elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animate');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Get animation delay from style or use default
+                        const style = window.getComputedStyle(entry.target);
+                        const animation = style.animation;
+                        
+                        if (!animation || animation === 'none 0s ease 0s 1 normal none running') {
+                            // If no animation is set, add a default one
+                            entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                        }
+                        
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

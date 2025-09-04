@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>อินเทอร์เน็ต, อินทราเน็ต, และเอกซ์ทราเน็ต</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --warning-color: #f72585;
+            --info-color: #7209b7;
+            --surface-color: #ffffff;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 2rem;
+        }
+
+        /* Navigation Styles */
+        nav {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.75rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .nav-brand:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-brand i {
+            margin-right: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:not(.active):hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            font-weight: 700;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        /* Main Content Styles */
+        .page-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent-color), var(--primary-color));
+            border-radius: 2px;
+        }
+
+        /* Card Styles */
+        .content-card {
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-card h2 {
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--secondary-color);
+        }
+
+        .content-card h2 i {
+            color: var(--accent-color);
+        }
+
+        .content-card h3 {
+            color: var(--info-color);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Network Types Section */
+        .network-types-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .network-type {
+            padding: 2rem 1.5rem;
+            border: 1px solid transparent;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .network-type::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+        }
+
+        .network-type.internet::before { background: linear-gradient(to right, #007bff, #4361ee); }
+        .network-type.intranet::before { background: linear-gradient(to right, #fd7e14, #f72585); }
+        .network-type.extranet::before { background: linear-gradient(to right, #28a745, #4cc9f0); }
+
+        .network-type:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .type-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.2rem;
+            display: inline-block;
+            height: 80px;
+            width: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .type-icon.internet { 
+            color: #007bff;
+            background-color: rgba(0, 123, 255, 0.1);
+        }
+        .type-icon.intranet { 
+            color: #fd7e14;
+            background-color: rgba(253, 126, 20, 0.1);
+        }
+        .type-icon.extranet { 
+            color: #28a745;
+            background-color: rgba(40, 167, 69, 0.1);
+        }
+
+        .network-type h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .network-type p {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        /* Zoning Section */
+        .zoning-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .zone {
+            padding: 1.8rem;
+            border-radius: var(--border-radius);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-top: 5px solid;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .zone:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .zone.trusted { 
+            border-color: #28a745;
+            background: linear-gradient(135deg, #ffffff 0%, #f0fff4 100%);
+        }
+        .zone.dmz { 
+            border-color: #ffc107;
+            background: linear-gradient(135deg, #ffffff 0%, #fff9e6 100%);
+        }
+        .zone.untrusted { 
+            border-color: #dc3545;
+            background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%);
+        }
+
+        .zone h3 {
+            margin-top: 0;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .zone.trusted h3 { 
+            border-color: rgba(40, 167, 69, 0.3);
+            color: #218838; 
+        }
+        .zone.dmz h3 { 
+            border-color: rgba(255, 193, 7, 0.3);
+            color: #d39e00; 
+        }
+        .zone.untrusted h3 { 
+            border-color: rgba(220, 53, 69, 0.3);
+            color: #c82333; 
+        }
+
+        .zone ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 1.5rem;
+        }
+
+        .zone ul li {
+            margin-bottom: 0.8rem;
+            padding-left: 2rem;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .zone ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        .zone.trusted ul li::before { 
+            content: '✓';
+            background-color: rgba(40, 167, 69, 0.1);
+            color: #28a745; 
+        }
+        .zone.dmz ul li::before { 
+            content: '↔';
+            background-color: rgba(255, 193, 7, 0.1);
+            color: #ffc107; 
+        }
+        .zone.untrusted ul li::before { 
+            content: '✗';
+            background-color: rgba(220, 53, 69, 0.1);
+            color: #dc3545; 
+        }
+
+        .zoning-diagram {
+            width: 100%;
+            max-width: 700px;
+            display: block;
+            margin: 2.5rem auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e9ecef;
+            transition: var(--transition);
+        }
+
+        .zoning-diagram:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Next Page Button */
+        .next-page-section {
+            text-align: center;
+            margin-top: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
+            animation-delay: 0.4s;
+        }
+
+        .next-page-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .next-page-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .next-page-btn i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .next-page-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Staggered animation delay for cards */
+        .content-card:nth-of-type(1) { animation-delay: 0.1s; }
+        .content-card:nth-of-type(2) { animation-delay: 0.2s; }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .network-types-container,
+            .zoning-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: var(--transition);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            
+            .nav-links li {
+                margin: 0.8rem 0;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content-card {
+                padding: 1.5rem;
+            }
+            
+            .network-type {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .content-card h2 {
+                font-size: 1.3rem;
+            }
+            
+            .type-icon {
+                font-size: 2rem;
+                height: 70px;
+                width: 70px;
+                line-height: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+     <nav>
+        <div class="nav-container">
+            <a href="home.html" class="nav-brand">
+                <i class="fas fa-network-wired"></i>
+                <span>Network</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="1.html">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="2.html">ประเภทเครือข่าย</a></li>
+                <li><a href="3.html" class="active">อินทราเน็ต, และเอกซ์ทราเน็ต</a></li>
+                <li><a href="4.html">IEEE 802</a></li>
+                <li><a href="5.html">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="6.html">ความเสียหาย</a></li>
+            </ul>
+        </div>
+     </nav>
+    <main class="page-container">
+        <header class="page-header">
+            <h1>อินทราเน็ต, และเอกซ์ทราเน็ต</h1>
+        </header>
+
+        <article class="content-card">
+            <h2><i class="fas fa-project-diagram"></i>ประเภทของเครือข่ายตามการเข้าถึง</h2>
+            <div class="network-types-container">
+                <div class="network-type internet">
+                    <div class="type-icon internet">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h3>อินเทอร์เน็ต (Internet)</h3>
+                    <p>เครือข่ายสาธารณะที่ใหญ่ที่สุดในโลก เชื่อมต่อทุกคนเข้าด้วยกันอย่างอิสระ ใช้โปรโตคอล TCP/IP ในการสื่อสารและแลกเปลี่ยนข้อมูล</p>
+                </div>
+                <div class="network-type intranet">
+                    <div class="type-icon intranet">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>อินทราเน็ต (Intranet)</h3>
+                    <p>เครือข่ายส่วนตัวสำหรับใช้ภายในองค์กรเท่านั้น เพื่อความปลอดภัยของข้อมูล ใช้เทคโนโลยีเดียวกับอินเทอร์เน็ต แต่ถูกจำกัดการเข้าถึง</p>
+                </div>
+                <div class="network-type extranet">
+                    <div class="type-icon extranet">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>เอกซ์ทราเน็ต (Extranet)</h3>
+                    <p>เครือข่ายที่เชื่อมต่อระหว่างองค์กรกับคู่ค้าภายนอกที่ได้รับอนุญาต เพื่อแบ่งปันข้อมูลบางส่วนอย่างปลอดภัย</p>
+                </div>
+            </div>
+        </article>
+
+        <article class="content-card">
+            <h2><i class="fas fa-shield-alt"></i>การแบ่งโซนเครือข่าย (Network Zoning)</h2>
+            <p>เพื่อความปลอดภัย องค์กรจะแบ่งเครือข่ายออกเป็นโซนต่างๆ ตามระดับความน่าเชื่อถือ และใช้ไฟร์วอลล์ควบคุมการเข้าออกระหว่างโซน</p>
+            <img src="./img/DMZ.png" alt="ภาพประกอบการแบ่งโซนเครือข่าย" class="zoning-diagram">
+            <div class="zoning-container">
+                <div class="zone trusted">
+                    <h3><i class="fas fa-lock"></i>Internal Zone</h3>
+                    <ul>
+                        <li><strong>วัตถุประสงค์:</strong> เครือข่ายภายในที่เชื่อถือได้สูงสุด</li>
+                        <li><strong>อุปกรณ์:</strong> เซิร์ฟเวอร์สำคัญ, ฐานข้อมูล, ระบบงานหลัก</li>
+                        <li><strong>การเข้าถึง:</strong> จำกัดเฉพาะผู้ใช้ภายในองค์กร</li>
+                    </ul>
+                </div>
+                <div class="zone dmz">
+                    <h3><i class="fas fa-exchange-alt"></i>DMZ (Demilitarized Zone)</h3>
+                    <ul>
+                        <li><strong>วัตถุประสงค์:</strong> โซนกันชนระหว่างเครือข่ายภายในและภายนอก</li>
+                        <li><strong>อุปกรณ์:</strong> เว็บเซิร์ฟเวอร์, อีเมลเซิร์ฟเวอร์ ที่ต้องให้บริการแก่คนภายนอก</li>
+                        <li><strong>การเข้าถึง:</strong> อนุญาตการเข้าถึงจากอินเทอร์เน็ตแต่ถูกจำกัด</li>
+                    </ul>
+                </div>
+                <div class="zone untrusted">
+                    <h3><i class="fas fa-ban"></i>External Zone</h3>
+                    <ul>
+                        <li><strong>วัตถุประสงค์:</strong> เครือข่ายภายนอกที่ไม่น่าเชื่อถือ</li>
+                        <li><strong>อุปกรณ์:</strong> อินเทอร์เน็ต, การเชื่อมต่อจากผู้ใช้ทั่วไป</li>
+                        <li><strong>การเข้าถึง:</strong> ถูกควบคุมและตรวจสอบอย่างเข้มงวด</li>
+                    </ul>
+                </div>
+            </div>
+        </article>
+
+        <section class="next-page-section">
+            <a href="4.html" class="next-page-btn">เรียนรู้หัวข้อถัดไป <i class="fas fa-arrow-right"></i></a>
+        </section>
+    </main>
+    <script>
+        // Toggle mobile navigation
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        
+        // Close mobile nav when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const isClickInsideNav = nav.contains(event.target);
+            
+            if (!isClickInsideNav) {
+                document.getElementById('navLinks').classList.remove('active');
+            }
+        });
+        
+        // Add animation to elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.content-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            cards.forEach(card => {
+                card.style.animationPlayState = 'paused';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

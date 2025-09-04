@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>มาตรฐาน IEEE 802</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --warning-color: #f72585;
+            --info-color: #7209b7;
+            --surface-color: #ffffff;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation Styles */
+        nav {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.75rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .nav-brand:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-brand i {
+            margin-right: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:not(.active):hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            font-weight: 700;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(67, 97, 238, 0.9), rgba(63, 55, 201, 0.9)), url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            padding: 4rem 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .page-header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, white, #c3cfe2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            padding: 0 1.5rem;
+        }
+
+        .intro {
+            background-color: var(--surface-color);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .standards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .standard-card {
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .standard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .card-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-icon {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            opacity: 0.2;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-body p {
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .read-more:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        /* Next Page Button */
+        .next-page-section {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .next-page-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.2);
+        }
+
+        .next-page-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: var(--transition);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            
+            .nav-links li {
+                margin: 0.8rem 0;
+            }
+            
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .page-header p {
+                font-size: 1.1rem;
+            }
+            
+            .standards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header {
+                padding: 3rem 1rem;
+            }
+            
+            .intro {
+                padding: 1.5rem;
+            }
+            
+            .card-header {
+                padding: 1.2rem;
+            }
+            
+            .card-body {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+   <nav>
+        <div class="nav-container">
+            <a href="home.html" class="nav-brand">
+                <i class="fas fa-network-wired"></i>
+                Network
+            </a>
+            <button class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="1.html">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="2.html">ประเภทเครือข่าย</a></li>
+                <li><a href="3.html">อินทราเน็ต, และเอกซ์ทราเน็ต</a></li>
+                <li><a href="4.html" class="active">IEEE 802</a></li>
+                <li><a href="5.html">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="6.html">ความเสียหาย</a></li>
+            </ul>
+        </div>
+     </nav>
+
+     <header class="page-header">
+        <div class="page-header-content">
+            <h1>มาตรฐาน IEEE 802</h1>
+            <p>ชุดมาตรฐานเครือข่าย LAN/MAN ที่กำหนดรูปแบบการสื่อสารในเครือข่ายท้องถิ่นและเครือข่ายส่วนบุคคล</p>
+        </div>
+     </header>
+
+     <main class="container">
+        <section class="intro">
+            <p>IEEE 802 เป็นชุดมาตรฐานเครือข่าย LAN/MAN ที่กำหนดรูปแบบการสื่อสารในเครือข่ายท้องถิ่นและเครือข่ายส่วนบุคคล ตัวอย่างมาตรฐานที่ใช้กันแพร่หลายได้แก่ Ethernet, การทำงานของสวิตช์และ VLAN, เครือข่ายไร้สาย (Wi‑Fi), และเครือข่ายส่วนบุคคล (Bluetooth/ZigBee) ทั้งหมดนี้เป็นผลงานของคณะทำงาน IEEE 802.1, 802.2, 802.3, 802.11, 802.15 เป็นต้น</p>
+        </section>
+
+        <section class="standards-container">
+            <!-- Standard 802.1 -->
+            <div class="standard-card">
+                <div class="card-header">
+                    <h3>IEEE 802.1 (Bridging และ LAN Management)</h3>
+                    <i class="card-icon fas fa-bridge"></i>
+                </div>
+                <div class="card-body">
+                    <p>มาตรฐานด้านโพรโทคอลบนเครือข่ายท้องถิ่น(LAN)</p>
+                </div>
+
+            </div>
+
+            <!-- Standard 802.2 -->
+            <div class="standard-card">
+                <div class="card-header">
+                    <h3>IEEE 802.2 (Logical Link Control)</h3>
+                    <i class="card-icon fas fa-link"></i>
+                </div>
+                <div class="card-body">
+                    <p>มาตรฐานด้านฟังก์ชั่นและโพรโทคอล LCC บนเครือข่ายท้องถิ่น</p>
+                    
+                </div>
+            </div>
+
+            <!-- Standard 802.3 -->
+            <div class="standard-card">
+                <div class="card-header">
+                    <h3>IEEE 802.3 (Ethernet)</h3>
+                    <i class="card-icon fas fa-ethernet"></i>
+                </div>
+                <div class="card-body">
+                    <p>มาตรฐานกำหนดการสื่อสารข้อมูลในระดับฮาร์ดแวร์แบบ Carrier Sense Multiple Access with Collision Detect(CSMA/CD)ซึ่งเป็นการสื่อสารข้อมูลในระบบอีเทอร์เน็ต(Ethernet)</p>
+                   
+                </div>
+            </div>
+
+            <!-- Standard 802.11 -->
+            <div class="standard-card">
+                <div class="card-header">
+                    <h3>IEEE 802.11 (Wireless LAN – Wi‑Fi)</h3>
+                    <i class="card-icon fas fa-wifi"></i>
+                </div>
+                <div class="card-body">
+                    <p>IEEE 802.11 คือมาตรฐานเครือข่ายแบบไร้สาย(Wireless LAN) ที่ใช้เชื่อมต่ออุปกรณ์ไร้สายในบ้านและสำนักงาน</p>
+                </div>
+            </div>
+
+            <!-- Standard 802.15 -->
+            <div class="standard-card">
+                <div class="card-header">
+                    <h3>IEEE 802.15 (Wireless PAN)</h3>
+                    <i class="card-icon fas fa-bluetooth-b"></i>
+                </div>
+                <div class="card-body">
+                    <p>IEEE 802.15 คือมาตรฐานสำหรับเครือข่ายส่วนบุคคลไร้สาย (Wireless Personal Area Network) เช่น การเชื่อมต่ออุปกรณ์ใกล้ตัว</p>
+                    <p>802.15.1 : มาตรฐาน Bluetooth</p>
+                    <p>802.15.3a : มาตรฐาน Ultra Wide Band (UWB)</p>
+                    <p>802.15.4 : มาตรฐาน ZigBee</p>
+                </div>
+            </div>
+        </section>
+     </main>
+
+    <section class="next-page-section">
+        <a href="5.html" class="next-page-btn">เรียนรู้หัวข้อถัดไป <i class="fas fa-arrow-right"></i></a>
+    </section>
+
+     <script>
+        // Toggle mobile navigation
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        
+        // Close mobile nav when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const isClickInsideNav = nav.contains(event.target);
+            
+            if (!isClickInsideNav) {
+                document.getElementById('navLinks').classList.remove('active');
+            }
+        });
+     </script>
+</body>
+</html>

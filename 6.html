@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ความเสียหายทางกายภาพ & ความเสียหายของข้อมูล</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --warning-color: #f72585;
+            --info-color: #7209b7;
+            --surface-color: #ffffff;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation Styles */
+        nav {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.75rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .nav-brand:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-brand i {
+            margin-right: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:not(.active):hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            font-weight: 700;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        /* Main Content */
+        .wrap {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .logo {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .lead {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .card h3 {
+            color: var(--secondary-color);
+            margin: 1.5rem 0 1rem;
+        }
+
+        .card h4 {
+            color: var(--info-color);
+            margin: 1.2rem 0 0.8rem;
+        }
+
+        .card ul, .card ol {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .tips {
+            background-color: rgba(76, 201, 240, 0.1);
+            border-left: 4px solid var(--success-color);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        /* Next Page Button */
+        .next-page-section {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .next-page-btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .next-page-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: var(--transition);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            
+            .nav-links li {
+                margin: 0.8rem 0;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .lead {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+   <nav>
+        <div class="nav-container">
+            <a href="home.html" class="nav-brand">
+                <i class="fas fa-network-wired"></i>
+                Network
+            </a>
+            <button class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                
+                <li><a href="1.html">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="2.html">ประเภทเครือข่าย</a></li>
+                <li><a href="3.html">อินทราเน็ต, และเอกซ์ทราเน็ต</a></li>
+                <li><a href="4.html">IEEE 802</a></li>
+                <li><a href="5.html">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="6.html" class="active">ความเสียหาย</a></li>
+            </ul>
+        </div>
+     </nav>
+
+     <div class="wrap">
+        <header>
+          <div class="logo" aria-hidden><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" fill="#062d33"/><path d="M6 9h12M6 13h8" stroke="#06b6d4" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div>
+            <h1>ความเสียหายทางกายภาพ & ความเสียหายของข้อมูล</h1>
+            <p class="lead">สาเหตุ ผลกระทบ และวิธีป้องกันแบบปฏิบัติได้จริง — เหมาะสำหรับครู ผู้ดูแลระบบ และผู้เรียน</p>
+          </div>
+        </header>
+
+        <div class="content">
+          <main>
+            <!-- Physical -->
+            <section id="physical" class="card">
+              <h2>ความเสียหายทางกายภาพ (Physical Damage)</h2>
+
+              <h3>1) ความหมาย</h3>
+              <p>ความเสียหายทางกายภาพหมายถึงการที่ฮาร์ดแวร์ อุปกรณ์เครือข่าย หรือโครงสร้างของศูนย์ข้อมูลได้รับความเสียหายจนไม่สามารถทำงานได้ตามปกติ เช่น เซิร์ฟเวอร์เสียหาย สายเคเบิลขาด หรืออุปกรณ์ถูกขโมย</p>
+
+              <h3>2) ตัวอย่างสาเหตุ</h3>
+              <ul>
+                <li>ภัยธรรมชาติ: น้ำท่วม ไฟไหม้ แผ่นดินไหว พายุ</li>
+                <li>ปัญหาไฟฟ้า: ไฟดับยาว แรงดันกระชาก (surge) UPS ล้มเหลว</li>
+                <li>บุกรุก/ขโมย/วานทำลายโดยคนภายนอกหรือคนภายใน</li>
+                <li>การติดตั้งหรือบำรุงรักษาผิดพลาด เช่นสายเคเบิลถูกลากสะดุด</li>
+                <li>สภาพแวดล้อมไม่เหมาะสม: ความร้อนสูง ฝุ่น ความชื้น</li>
+              </ul>
+
+              <h3>3) ผลกระทบ</h3>
+              <ul>
+                <li>ระบบหยุดทำงาน (downtime) ส่งผลต่อการให้บริการและธุรกิจ</li>
+                <li>ค่าใช้จ่ายซ่อม/เปลี่ยนอุปกรณ์สูง</li>
+                <li>ข้อมูลบนอุปกรณ์อาจเสียหาย (data corruption)</li>
+                <li>ผลต่อ SLA และความเชื่อมั่นของลูกค้า</li>
+              </ul>
+
+              <h3>4) วิธีป้องกัน (เชิงฟิสิกส์)</h3>
+              <ol>
+                <li><strong>ห้องเซิร์ฟเวอร์ปลอดภัย:</strong> ประตูล็อก ระบบคีย์การ์ด บันทึกรายการเข้าออก (access log)</li>
+                <li><strong>UPS & Generator:</strong> ใช้ UPS สำหรับการปิดอย่างปลอดภัย และ generator สำหรับสำรองระยะยาว</li>
+                <li><strong>ป้องกันแรงดัน:</strong> ใช้ surge protector และ power conditioner</li>
+                <li><strong>ดับเพลิงที่เหมาะสม:</strong> ใช้ระบบ clean-agent (ไม่ใช้น้ำ) เช่น FM-200/Novec สำหรับห้องไอที</li>
+                <li><strong>ควบคุมสิ่งแวดล้อม:</strong> HVAC, เซ็นเซอร์อุณหภูมิ/ความชื้น/น้ำรั่ว/ควัน และระบบแจ้งเตือน</li>
+                <li><strong>จัดวางและจัดสาย:</strong> ยึดแร็ค จัดสายเป็นระเบียบ ใช้ patch panel และ labeling</li>
+                <li><strong>CCTV & การเฝ้าระวัง:</strong> ติดกล้องบริเวณจุดสำคัญและบันทึกเหตุการณ์</li>
+                <li><strong>สำรองฮาร์ดแวร์:</strong> มีชิ้นส่วน hot-spare เช่น PSU, NIC, HDD</li>
+                <li><strong>Geo-redundancy:</strong> กระจายศูนย์ข้อมูล (data center redundancy) เพื่อลดความเสี่ยงจากเหตุภูมิศาสตร์</li>
+              </ol>
+
+              <div class="tips"><strong>Tip:</strong> ตรวจบำรุงรักษา (preventive maintenance) เป็นประจำ เช็ค UPS, generator, HVAC, และระบบดับเพลิงตามรอบที่กำหนด</div>
+            </section>
+
+            <!-- Data -->
+            <section id="data" class="card">
+              <h2>ความเสียหายของข้อมูล (Data Damage / Loss / Corruption)</h2>
+
+              <h3>1) ความหมาย</h3>
+              <p>ความเสียหายของข้อมูลหมายถึงการสูญหาย การแก้ไขโดยไม่ได้รับอนุญาต หรือการเข้าถึง/ขโมยข้อมูล ที่ทำให้ข้อมูลไม่ถูกต้อง ใช้งานไม่ได้ หรือรั่วไหล</p>
+
+              <h3>2) ตัวอย่างสาเหตุ</h3>
+              <ul>
+                <li>ฮาร์ดแวร์ล้มเหลว: HDD/SSD, RAID controller เสีย</li>
+                <li>ข้อผิดพลาดมนุษย์: ลบไฟล์หรือคอนฟิกผิด</li>
+                <li>มัลแวร์ / Ransomware: เข้ารหัส/ลบไฟล์และเรียกค่าไถ่</li>
+                <li>การโจมตีทางเครือข่าย: data exfiltration, tampering</li>
+                <li>ซัพพลายเชนหรือบุคลากรภายในที่ทำข้อมูลรั่วไหล</li>
+              </ul>
+
+              <h3>3) ผลกระทบ</h3>
+              <ul>
+                <li>ปิดการดำเนินงานชั่วคราวหรือถาวร</li>
+                <li>ค่าใช้จ่ายสูงในการกู้คืนข้อมูลหรือเรียกคืนบริการ</li>
+                <li>ผลทางกฎหมายและการปฏิบัติตามข้อบังคับ (compliance)</li>
+                <li>เสียชื่อเสียงและความไว้วางใจจากลูกค้า</li>
+              </ul>
+
+              <h3>4) วิธีป้องกัน </h3>
+
+              <h4>1.กฎ 3-2-1 สำหรับสำรองข้อมูล (Backup)</h4>
+              <p>เก็บข้อมูลอย่างน้อย 3 ชุด บน 2 สื่อ (เช่น ดิสก์ + เทป/คลาวด์) และมี 1 ชุดเป็น offsite หรือ offline/air-gapped เพื่อป้องกัน Ransomware</p>
+
+              <h4>2.Immutable backups & Air-gapped copies</h4>
+              <p>ใช้ backup ที่ไม่สามารถแก้ไขหรือลบได้ (immutable) และเก็บสำเนาแบบไม่เชื่อมต่อเครือข่ายหรือเก็บแยกทางกายภาพ</p>
+
+              <h4>3.Encryption (เข้ารหัส)</h4>
+              <ul>
+                <li>เข้ารหัสข้อมูลขณะส่ง (TLS 1.2/1.3 หรือ VPN)</li>
+                <li>เข้ารหัสข้อมูลขณะเก็บ (AES-256 หรือมาตรฐานเทียบเท่า)</li>
+                <li>จัดการคีย์อย่างปลอดภัย (KMS)</li>
+              </ul>
+
+              <h4>4.Access Control & Authentication</h4>
+              <ul>
+                <li>Principle of Least Privilege (ให้สิทธิขั้นต่ำสุด)</li>
+                <li>RBAC / ABAC และ Multi-Factor Authentication (MFA)</li>
+                <li>Privileged Access Management (PAM) สำหรับบัญชีระดับสูง</li>
+              </ul>
+
+              <h4>5.Network segmentation & Microsegmentation</h4>
+              <p>แยกเครือข่ายเป็นโซน (DMZ, Internal, Sensitive) และใช้ firewall/ACL ระหว่างโซนเพื่อลดการเคลื่อนที่ด้านข้าง</p>
+
+              <h4>6.Endpoint & Server Protection</h4>
+              <ul>
+                <li>ใช้ EDR/XDR เพื่อตรวจจับพฤติกรรมผิดปกติ</li>
+                <li>ติดตั้ง antivirus/antimalware และ application whitelisting</li>
+                <li>System hardening: ปิดบริการที่ไม่จำเป็น และอัพเดต security baseline</li>
+              </ul>
+
+              <h4>7.Patch Management & Vulnerability Scanning</h4>
+              <p>มีกระบวนการทดสอบและติดตั้งแพตช์อย่างสม่ำเสมอและสแกนหาช่องโหว่อย่างต่อเนื่อง</p>
+
+              <h4>8.Monitoring, Logging & SIEM</h4>
+              <p>เก็บ log สำคัญ ตรวจจับพฤติกรรมผิดปกติ (เช่น mass-file-encryption) และใช้ SIEM รวมเหตุการณ์พร้อมแจ้งเตือน</p>
+
+              <h4>9.Data Classification & DLP</h4>
+              <p>จัดประเภทข้อมูลตามระดับความลับ (Public/Internal/Confidential/Restricted) และติดตั้ง DLP เพื่อป้องกันการรั่วไหลโดยไม่ตั้งใจ</p>
+
+              <div class="tips"><strong>Note:</strong> การป้องกันข้อมูลต้องผสานทั้งเทคนิค นโยบาย และการฝึกอบรมผู้ใช้ — เทคโนโลยีเดียวไม่พอ</div>
+            </section>
+
+            <!-- Prevention summary -->
+            <section id="prevention" class="card">
+              <h2>สรุปวิธีป้องกัน (รวม)</h2>
+              <ul>
+                <li>ออกแบบห้องเซิร์ฟเวอร์ที่ปลอดภัยและมี UPS/HVAC/Fire suppression</li>
+                <li>ใช้นโยบายสำรอง 3-2-1 และมี immutable/offline copies</li>
+                <li>เข้ารหัสข้อมูลทั้ง at-rest และ in-transit</li>
+                <li>ใช้ RBAC, MFA, PAM และ principle of least privilege</li>
+                <li>แยกโซนเครือข่าย (segmentation) และติดตั้ง firewall/IDS/IPS</li>
+                <li>ติดตั้ง EDR/SIEM และมอนิเตอร์แบบเรียลไทม์</li>
+                <li>ทำ patch & vulnerability management</li>
+                <li>ฝึกอบรมพนักงานเรื่อง phishing และ security awareness</li>
+              </ul>
+            </section>
+
+            <!-- Next Page Button -->
+            <section class="next-page-section">
+              <a href="1.html" class="next-page-btn">เริ่มต้นเรียนรู้เครือข่าย →</a>
+            </section>
+
+            <footer>
+              <p>เอกสารนี้จัดทำเป็นสื่อการสอน — คุณสามารถปรับข้อความ เพิ่มตัวอย่าง หรือแปลงเป็นสไลด์และเช็คลิสต์ PDF ได้ตามต้องการ</p>
+            </footer>
+          </main>
+
+          
+        </div>
+      </div>
+
+     <script>
+        // Toggle mobile navigation
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        
+        // Close mobile nav when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const isClickInsideNav = nav.contains(event.target);
+            
+            if (!isClickInsideNav) {
+                document.getElementById('navLinks').classList.remove('active');
+            }
+        });
+     </script>
+</body>
+</html>

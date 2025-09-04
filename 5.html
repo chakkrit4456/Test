@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รูปแบบการเชื่อมต่อของเครือข่ายคอมพิวเตอร์</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --warning-color: #f72585;
+            --info-color: #7209b7;
+            --surface-color: #ffffff;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 2rem;
+        }
+
+        /* Navigation Styles */
+         nav {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.75rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .nav-brand:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-brand i {
+            margin-right: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:not(.active):hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            font-weight: 700;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        /* Main Content Styles */
+        .page-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent-color), var(--primary-color));
+            border-radius: 2px;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Card Styles */
+        .content-card {
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .connection-type {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .connection-info {
+            padding-right: 1rem;
+        }
+
+        .connection-info h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .connection-info h3 i {
+            color: var(--accent-color);
+        }
+
+        .connection-info p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .connection-image {
+            text-align: center;
+            position: relative;
+        }
+
+        .connection-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .connection-image img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .image-caption {
+            display: block;
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Highlight Box */
+        .highlight {
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.05) 0%, rgba(73, 144, 240, 0.1) 100%);
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        /* Next Page Button */
+        .next-page-section {
+            text-align: center;
+            margin-top: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
+            animation-delay: 0.4s;
+        }
+
+        .next-page-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .next-page-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .next-page-btn i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .next-page-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Staggered animation delay for cards */
+        .connection-type:nth-of-type(1) { animation-delay: 0.1s; }
+        .connection-type:nth-of-type(2) { animation-delay: 0.2s; }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .connection-type {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .connection-info {
+                padding-right: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: var(--transition);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            
+            .nav-links li {
+                margin: 0.8rem 0;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content-card {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .connection-info h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+     <nav>
+        <div class="nav-container">
+            <a href="home.html" class="nav-brand">
+                <i class="fas fa-network-wired"></i>
+                <span>Network</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="1.html">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="2.html">ประเภทเครือข่าย</a></li>
+                <li><a href="3.html">อินทราเน็ต, และเอกซ์ทราเน็ต</a></li>
+                <li><a href="4.html">IEEE 802</a></li>
+                <li><a href="5.html" class="active">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="6.html">ความเสียหาย</a></li>
+            </ul>
+        </div>
+     </nav>
+    <main class="page-container">
+        <header class="page-header">
+            <h1>รูปแบบการเชื่อมต่อของเครือข่ายคอมพิวเตอร์</h1>
+            <p>คือวิธีการที่อุปกรณ์ตั้งแต่ 2 อุปกรณ์เชื่อมต่อกันด้วยสื่อส่งข้อมูล (Transmission Link) อาจเป็นแบบมีหรือไม่มีสายก็ได้</p>
+        </header>
+
+        <article class="content-card">
+            <div class="connection-type">
+                <div class="connection-info">
+                    <h3><i class="fas fa-link"></i>แบบจุดต่อจุด (Point-to-Point)</h3>
+                    <p>คือ วิธีเชื่อมต่อสื่อส่งข้อมูลระหว่าง 2 อุปกรณ์ โดยมีเส้นทางเพียงเส้นเดียว เช่น การเชื่อมต่อระหว่างคอมพิวเตอร์และโทรศัพท์มือถือ</p>
+                    <div class="highlight">
+                        <p><strong>ตัวอย่างการใช้งาน:</strong> การเชื่อมต่อระหว่างคอมพิวเตอร์สองเครื่องด้วยสาย USB, การเชื่อมต่อ Bluetooth ระหว่างโทรศัพท์กับหูฟัง</p>
+                    </div>
+                </div>
+                <div class="connection-image">
+                    <img src="./img/sa5.png" alt="แบบจุดต่อจุด (Point-to-Point)">
+                    <span class="image-caption">การเชื่อมต่อแบบ Point-to-Point</span>
+                </div>
+            </div>
+
+            <div class="connection-type">
+                <div class="connection-info">
+                    <h3><i class="fas fa-share-alt"></i>แบบหลายจุดหรือมัลติพอยท์ (Multi-Point)</h3>
+                    <p>เรียกอีกอย่างว่า multidrop line หมายถึง สื่อส่งข้อมูล 1 สื่อมีการเชื่อมต่อไปยังหลายอุปกรณ์โดยใช้สื่อส่งข้อมูลเดียว เช่น การกระจายข้อมูลของ Access Point ผ่าน WIFI</p>
+                    <div class="highlight">
+                        <p><strong>ตัวอย่างการใช้งาน:</strong> ระบบเครือข่ายท้องถิ่น (LAN), การกระจายสัญญาณ Wi-Fi, ระบบเครือข่ายแบบบัส (Bus Network)</p>
+                    </div>
+                </div>
+                <div class="connection-image">
+                    <img src="./img/Shared_Point.jpg" alt="แบบหลายจุดหรือมัลติพอยท์ (Multi-Point)">
+                    <span class="image-caption">การเชื่อมต่อแบบ Multi-Point</span>
+                </div>
+            </div>
+        </article>
+
+        <section class="next-page-section">
+            <a href="6.html" class="next-page-btn">เรียนรู้หัวข้อถัดไป <i class="fas fa-arrow-right"></i></a>
+        </section>
+    </main>
+    <script>
+        // Toggle mobile navigation
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        
+        // Close mobile nav when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const isClickInsideNav = nav.contains(event.target);
+            
+            if (!isClickInsideNav) {
+                document.getElementById('navLinks').classList.remove('active');
+            }
+        });
+        
+        // Add animation to elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.content-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            cards.forEach(card => {
+                card.style.animationPlayState = 'paused';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
