@@ -44,7 +44,7 @@
          nav {
             background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 0.75rem 0;
+            padding: 0.8rem 0;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
@@ -63,7 +63,7 @@
         .nav-brand {
             display: flex;
             align-items: center;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             text-decoration: none;
             color: white;
@@ -76,7 +76,7 @@
 
         .nav-brand i {
             margin-right: 0.5rem;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
         }
 
         .nav-toggle {
@@ -94,7 +94,8 @@
         }
 
         .nav-links li {
-            margin-left: 1.5rem;
+            margin-left: 1.2rem;
+            position: relative;
         }
 
         .nav-links a {
@@ -104,11 +105,12 @@
             padding: 0.5rem 0.8rem;
             border-radius: 6px;
             transition: var(--transition);
-            position: relative;
+            color: rgba(255, 255, 255, 0.85);
         }
 
-        .nav-links a:not(.active):hover {
-            background-color: rgba(255, 255, 255, 0.1);
+        .nav-links a:hover, .nav-links a.active {
+            color: white;
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .nav-links a.active {
@@ -124,7 +126,7 @@
             transform: translateX(-50%);
             width: 6px;
             height: 6px;
-            background-color: white;
+            background: white;
             border-radius: 50%;
         }
 
@@ -322,7 +324,7 @@
             
             .nav-links {
                 position: fixed;
-                top: 60px;
+                top: 64px; /* Adjusted to match padding */
                 left: 0;
                 right: 0;
                 background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
@@ -365,20 +367,20 @@
 <body>
      <nav>
         <div class="nav-container">
-            <a href="home.html" class="nav-brand">
+            <a href="/index.html" class="nav-brand">
                 <i class="fas fa-network-wired"></i>
-                <span>Network</span>
+                Network
             </a>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <button class="nav-toggle" id="navToggle">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="1.html">รูปแบบการเชื่อมต่อ</a></li>
-                <li><a href="2.html">ประเภทเครือข่าย</a></li>
-                <li><a href="3.html">อินทราเน็ต, และเอกซ์ทราเน็ต</a></li>
-                <li><a href="4.html">IEEE 802</a></li>
-                <li><a href="5.html" class="active">รูปแบบการเชื่อมต่อ</a></li>
-                <li><a href="6.html">ความเสียหาย</a></li>
+                <li><a href="../pages/1.html">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="../pages/2.html">ประเภทเครือข่าย</a></li>
+                <li><a href="../pages/3.html">อินทราเน็ต, และเอกซ์ทราเน็ต</a></li>
+                <li><a href="../pages/4.html">IEEE 802</a></li>
+                <li><a href="../pages/5.html">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="../pages/6.html">ความเสียหาย</a></li>
             </ul>
         </div>
      </nav>
@@ -398,7 +400,7 @@
                     </div>
                 </div>
                 <div class="connection-image">
-                    <img src="./img/sa5.png" alt="แบบจุดต่อจุด (Point-to-Point)">
+                    <img src="../img/sa5.png" alt="แบบจุดต่อจุด (Point-to-Point)">
                     <span class="image-caption">การเชื่อมต่อแบบ Point-to-Point</span>
                 </div>
             </div>
@@ -412,14 +414,14 @@
                     </div>
                 </div>
                 <div class="connection-image">
-                    <img src="./img/Shared_Point.jpg" alt="แบบหลายจุดหรือมัลติพอยท์ (Multi-Point)">
+                    <img src="../img/Shared_Point.jpg" alt="แบบหลายจุดหรือมัลติพอยท์ (Multi-Point)">
                     <span class="image-caption">การเชื่อมต่อแบบ Multi-Point</span>
                 </div>
             </div>
         </article>
 
         <section class="next-page-section">
-            <a href="6.html" class="next-page-btn">เรียนรู้หัวข้อถัดไป <i class="fas fa-arrow-right"></i></a>
+            <a href="../pages/6.html" class="next-page-btn">เรียนรู้หัวข้อถัดไป <i class="fas fa-arrow-right"></i></a>
         </section>
     </main>
     <script>

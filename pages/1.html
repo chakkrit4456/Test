@@ -264,19 +264,20 @@
             }
             
             .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
+                position: fixed;
+                top: 60px;
                 left: 0;
                 right: 0;
-                background: var(--primary);
-                padding: 1rem;
+                background: linear-gradient(to right, var(--primary), var(--secondary));
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             }
             
-            .nav-links.show {
-                display: flex;
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
             }
             
             .nav-links li {
@@ -310,20 +311,20 @@
 <body>
     <nav>
         <div class="nav-container">
-            <a href="home.html" class="nav-brand">
+            <a href="/index.html" class="nav-brand">
                 <i class="fas fa-network-wired"></i>
-                <span>Network</span>
+                Network
             </a>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <button class="nav-toggle" id="navToggle">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="1.html" class="active">รูปแบบการเชื่อมต่อ</a></li>
-                <li><a href="2.html">ประเภทเครือข่าย</a></li>
-                <li><a href="3.html">อินทราเน็ต, และเอกซ์ทราเน็ต</a></li>
-                <li><a href="4.html">IEEE 802</a></li>
-                <li><a href="5.html">รูปแบบการเชื่อมต่อ</a></li>
-                <li><a href="6.html">ความเสียหาย</a></li>
+                <li><a href="../pages/1.html">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="../pages/2.html">ประเภทเครือข่าย</a></li>
+                <li><a href="../pages/3.html">อินทราเน็ต, และเอกซ์ทราเน็ต</a></li>
+                <li><a href="../pages/4.html">IEEE 802</a></li>
+                <li><a href="../pages/5.html">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="../pages/6.html">ความเสียหาย</a></li>
             </ul>
         </div>
      </nav>
@@ -353,7 +354,7 @@
                     <p>
                         ในปัจจุบันนิยมใช้เซิร์ฟเวอร์หลายๆเครื่องทำงานร่วมกัน (Cloud Computing) เพื่อรองรับผู้ใช้งานจำนวนมากและเพิ่มประสิทธิภาพ เช่น เซิร์ฟเวอร์ของ YouTube หรือ Facebook เป็นต้น
                     </p>
-                    <img src="img/The-Client-Server-Paradigm.png" alt="ภาพประกอบรูปแบบ Client-Server" class="type-image">
+                    <img src="../img/The-Client-Server-Paradigm.png" alt="ภาพประกอบรูปแบบ Client-Server" class="type-image">
                 </div>
             </article>
 
@@ -365,21 +366,31 @@
                 <div class="type-content">
                     <p>เป็นระบบเครือข่ายขนาดเล็กที่อยู่ในกลุ่มเดียวกันที่เรียกอีกอย่างว่า Workgroup โดยเครื่องคอมพิวเตอร์ทุกเครื่องมีสิทธิ์เท่าเทียมกัน นิยมใช้ในงานทั่วไปในสำนักงานขนาดเล็กเนื่องจากมีราคาถูก ส่วนมากใช้นิยมแชร์ไฟล์และแชร์สู่เครื่องพิมพ์</p>
                     <p>เครือข่ายแบบนี้จะเก็บไฟล์และการเชื่อมต่ออุปกรณ์ต่างๆ ไว้ที่เครื่องคอมพิวเตอร์ของผู้ใช้แต่ละคนโดยไม่มีคอมพิวเตอร์ส่วนกลางที่ทำหน้าที่นี้</p>
-                    <img src="./img/peer-to-peer-network.jpg" alt="ภาพประกอบรูปแบบ Peer-to-Peer" class="type-image">
+                    <img src="../img/peer-to-peer-network.jpg" alt="ภาพประกอบรูปแบบ Peer-to-Peer" class="type-image">
                 </div>
             </article>
         </div>
 
         <section class="next-page-section animate">
-            <a href="2.html" class="next-page-btn">เรียนรู้หัวข้อถัดไป →</a>
+            <a href="../pages/2.html" class="next-page-btn">เรียนรู้หัวข้อถัดไป →</a>
         </section>
     </main>
     <script>
         // Toggle mobile navigation
         document.getElementById('navToggle').addEventListener('click', function() {
-            document.getElementById('navLinks').classList.toggle('show');
+            document.getElementById('navLinks').classList.toggle('active');
         });
         
+        // Close mobile nav when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const isClickInsideNav = nav.contains(event.target);
+            
+            if (!isClickInsideNav) {
+                document.getElementById('navLinks').classList.remove('active');
+            }
+        });
+
         // Add animation to elements when they come into view
         document.addEventListener('DOMContentLoaded', function() {
             const animatedElements = document.querySelectorAll('.animate');

@@ -303,19 +303,21 @@
             }
             
             .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
+                position: fixed;
+                top: 60px;
                 left: 0;
                 right: 0;
-                background: var(--primary);
-                padding: 1rem;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                background: linear-gradient(to right, var(--primary), var(--secondary));
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: var(--transition);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             }
             
-            .nav-links.show {
-                display: flex;
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
             }
             
             .nav-links li {
@@ -348,21 +350,21 @@
 </head>
 <body>
     <nav>
-        <div class="nav-container">
-            <a href="home.html" class="nav-brand">
+       <div class="nav-container">
+            <a href="/index.html" class="nav-brand">
                 <i class="fas fa-network-wired"></i>
-                <span>Network</span>
+                Network
             </a>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <button class="nav-toggle" id="navToggle">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="1.html">รูปแบบการเชื่อมต่อ</a></li>
-                <li><a href="2.html" class="active">ประเภทเครือข่าย</a></li>
-                <li><a href="3.html">อินทราเน็ต, และเอกซ์ทราเน็ต</a></li>
-                <li><a href="4.html">IEEE 802</a></li>
-                <li><a href="5.html">รูปแบบการเชื่อมต่อ</a></li>
-                <li><a href="6.html">ความเสียหาย</a></li>
+                <li><a href="../pages/1.html">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href=".../pages/2.html">ประเภทเครือข่าย</a></li>
+                <li><a href="../pages/3.html">อินทราเน็ต, และเอกซ์ทราเน็ต</a></li>
+                <li><a href="../pages/4.html">IEEE 802</a></li>
+                <li><a href="../pages/5.html">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="../pages/6.html">ความเสียหาย</a></li>
             </ul>
         </div>
      </nav>
@@ -370,7 +372,7 @@
         <header class="page-header">
             <h1>ประเภทของระบบเครือข่าย</h1>
             <p>แบ่งตามขนาดพื้นที่ทางภูมิศาสตร์ที่เครือข่ายครอบคลุม</p>
-            <img src="./img/PAN-LAN.jpg" alt="แผนภาพเปรียบเทียบขนาดเครือข่าย PAN, LAN, CAN, MAN, และ WAN" class="intro-image">
+            <img src="../img/PAN-LAN.jpg" alt="แผนภาพเปรียบเทียบขนาดเครือข่าย PAN, LAN, CAN, MAN, และ WAN" class="intro-image">
         </header>
 
         <div class="network-grid">
@@ -381,7 +383,7 @@
                 </div>
                 <div class="card-content">
                     <p>เครือข่ายส่วนบุคคล (PAN) คือ เครือข่ายคอมพิวเตอร์ขนาดเล็กที่ออกแบบมาเพื่อการเชื่อมต่ออุปกรณ์อิเล็กทรอนิกส์ต่าง ๆ รอบตัวบุคคลในระยะใกล้ โดยทั่วไปมักครอบคลุมรัศมีประมาณ 1–10 เมตร เหมาะสำหรับการใช้งานส่วนบุคคล เช่น การเชื่อมต่อระหว่างสมาร์ตโฟน แล็ปท็อป แท็บเล็ต หูฟังไร้สาย เครื่องพิมพ์ หรืออุปกรณ์ IoT</p>
-                    <img src="./img/pan.jpg" alt="">
+                    <img src="../img/pan.jpg" alt="">
                 </div>
             </article>
 
@@ -392,7 +394,7 @@
                 </div>
                 <div class="card-content">
                     <p>เครือข่ายท้องถิ่น (LAN) คือเครือข่ายคอมพิวเตอร์ที่ครอบคลุมพื้นที่ขนาดเล็กถึงปานกลาง เช่น อาคารสำนักงาน โรงเรียน มหาวิทยาลัย หรือที่พักอาศัย ใช้สำหรับเชื่อมต่ออุปกรณ์ต่าง ๆ ภายในพื้นที่เดียวกัน เพื่อให้สามารถสื่อสารและแลกเปลี่ยนข้อมูลกันได้อย่างรวดเร็ว</p>
-                    <img src="img/Home_LAN_local_area_network_example_diagram.png" alt="">
+                    <img src="../img/Home_LAN_local_area_network_example_diagram.png" alt="">
                 </div>
             </article>
 
@@ -403,7 +405,7 @@
                 </div>
                 <div class="card-content">
                     <p>เครือข่ายระดับเมือง (MAN) คือเครือข่ายคอมพิวเตอร์ที่ครอบคลุมพื้นที่ขนาดใหญ่กว่า LAN แต่เล็กกว่า WAN โดยมักครอบคลุมพื้นที่ระดับเมือง อำเภอ หรือจังหวัด มีระยะทางตั้งแต่หลายกิโลเมตรจนถึงร้อยกว่ากิโลเมตร ใช้เพื่อเชื่อมโยง หลาย ๆ LAN เข้าด้วยกัน เพื่อให้หน่วยงานหรือองค์กรในพื้นที่เดียวกันสามารถสื่อสารและแลกเปลี่ยนข้อมูลได้สะดวก</p>
-                    <img src="img/9e117601-92a0-492b-b91d-36560564662a.jpeg" alt="">
+                    <img src="../img/9e117601-92a0-492b-b91d-36560564662a.jpeg" alt="">
                 </div>
             </article>
 
@@ -414,19 +416,29 @@
                 </div>
                 <div class="card-content">
                     <p>เครือข่ายวงกว้าง (WAN) คือเครือข่ายคอมพิวเตอร์ที่ครอบคลุมพื้นที่ขนาดใหญ่มาก ตั้งแต่ระดับประเทศ ทวีป ไปจนถึงทั่วโลก ใช้สำหรับเชื่อมโยงเครือข่าย LAN หรือ MAN หลาย ๆ เครือข่ายเข้าด้วยกัน โดยอาศัยผู้ให้บริการโทรคมนาคมและอินเทอร์เน็ตเป็นตัวกลาง"</p>
-                    <img src="img/lmw.jpg" alt="">
+                    <img src="../img/lmw.jpg" alt="">
                 </div>
             </article>
         </div>
 
         <section class="next-page-section animate">
-            <a href="3.html" class="next-page-btn">เรียนรู้หัวข้อถัดไป →</a>
+            <a href="../pages/3.html" class="next-page-btn">เรียนรู้หัวข้อถัดไป →</a>
         </section>
      </main>
     <script>
         // Toggle mobile navigation
         document.getElementById('navToggle').addEventListener('click', function() {
-            document.getElementById('navLinks').classList.toggle('show');
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
+        // Close mobile nav when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const isClickInsideNav = nav.contains(event.target);
+            
+            if (!isClickInsideNav) {
+                document.getElementById('navLinks').classList.remove('active');
+            }
         });
         
         // Add animation to elements when they come into view
