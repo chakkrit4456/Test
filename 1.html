@@ -10,24 +10,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #4361ee;
-            --secondary: #3a0ca3;
-            --accent: #7209b7;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --success: #4cc9f0;
-            --warning: #f72585;
-            --gray-100: #f8f9fa;
-            --gray-200: #e9ecef;
-            --gray-300: #dee2e6;
-            --gray-400: #ced4da;
-            --gray-500: #adb5bd;
-            --gray-600: #6c757d;
-            --gray-700: #495057;
-            --gray-800: #343a40;
-            --gray-900: #212529;
+            /* Updated to match 4.html */
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --warning-color: #f72585;
+            --info-color: #7209b7;
+            --surface-color: #ffffff;
             --border-radius: 12px;
-            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
             --transition: all 0.3s ease;
         }
 
@@ -39,14 +33,14 @@
 
         body {
             font-family: 'Sarabun', sans-serif;
-            background-color: #f5f7ff;
-            color: var(--gray-800);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* Match 4.html */
+            color: #333;
             line-height: 1.6;
         }
 
-        /* Navigation Styles */
+        /* Navigation Styles - Updated to match index.html */
         nav {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
             color: white;
             padding: 0.8rem 0;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -71,6 +65,11 @@
             font-size: 1.4rem;
             text-decoration: none;
             color: white;
+            transition: var(--transition);
+        }
+
+        .nav-brand:hover {
+            transform: translateY(-2px);
         }
 
         .nav-brand i {
@@ -111,6 +110,11 @@
             background: rgba(255, 255, 255, 0.15);
         }
 
+        .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            font-weight: 700;
+        }
+
         .nav-links a.active::after {
             content: '';
             position: absolute;
@@ -137,17 +141,17 @@
             margin-bottom: 2.5rem;
             box-shadow: var(--box-shadow);
             text-align: center;
-            border-left: 5px solid var(--primary);
+            border-left: 5px solid var(--primary-color);
         }
 
         .page-header h1 {
-            color: var(--primary);
+            color: var(--primary-color);
             margin-bottom: 1rem;
             font-size: 2.2rem;
         }
 
         .page-header p {
-            color: var(--gray-600);
+            color: #6c757d;
             font-size: 1.1rem;
             max-width: 800px;
             margin: 0 auto;
@@ -175,7 +179,7 @@
         }
 
         .type-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             padding: 1.5rem;
             text-align: center;
@@ -197,14 +201,136 @@
 
         .type-content p {
             margin-bottom: 1.2rem;
-            color: var(--gray-700);
+            color: #495057;
         }
 
         .type-image {
             width: 100%;
             border-radius: 8px;
             margin-top: 1rem;
-            border: 1px solid var(--gray-200);
+            border: 1px solid #e9ecef;
+        }
+
+        /* Quiz Styles */
+        .quiz-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            margin: 3rem 0;
+            box-shadow: var(--box-shadow);
+            border-left: 5px solid var(--info-color); /* Match 4.html */
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-header h2 {
+            color: var(--info-color); /* Match 4.html */
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .quiz-header p {
+            color: #6c757d;
+        }
+
+        .quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .question {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .options {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .option input {
+            display: none;
+        }
+
+        .option-label {
+            padding: 0.5rem 1rem;
+            background: #e9ecef;
+            border-radius: 50px;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .option input:checked + .option-label {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .quiz-actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .submit-btn {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); /* Match 4.html */
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(114, 9, 183, 0.4);
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            background: #f8f9fa;
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .score {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .score-text {
+            margin-bottom: 1rem;
+            color: #6c757d;
         }
 
         /* Next Page Button */
@@ -215,19 +341,37 @@
 
         .next-page-btn {
             display: inline-block;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 1rem 2.5rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
             text-decoration: none;
+            border-radius: 50px;
             font-weight: 600;
+            font-size: 1.1rem; /* Match main.html */
             transition: var(--transition);
             box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+            position: relative; /* Match main.html */
+            overflow: hidden; /* Match main.html */
         }
 
         .next-page-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .next-page-btn::before { /* Match main.html */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .next-page-btn:hover::before { /* Match main.html */
+            left: 100%;
         }
 
         /* Animation */
@@ -249,15 +393,10 @@
         .page-header { animation-delay: 0.1s; }
         .connection-types .type:nth-child(1) { animation-delay: 0.2s; }
         .connection-types .type:nth-child(2) { animation-delay: 0.3s; }
-        .next-page-section { animation-delay: 0.4s; }
+        .quiz-section { animation-delay: 0.4s; }
+        .next-page-section { animation-delay: 0.5s; }
 
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .connection-types {
-                grid-template-columns: 1fr;
-            }
-        }
-
+        /* Responsive Design - Updated to match index.html */
         @media (max-width: 768px) {
             .nav-toggle {
                 display: block;
@@ -265,15 +404,16 @@
             
             .nav-links {
                 position: fixed;
-                top: 60px;
+                top: 64px;
                 left: 0;
                 right: 0;
-                background: linear-gradient(to right, var(--primary), var(--secondary));
+                background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
                 flex-direction: column;
                 align-items: center;
                 padding: 1rem 0;
                 clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                transition: var(--transition);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             }
             
             .nav-links.active {
@@ -281,7 +421,7 @@
             }
             
             .nav-links li {
-                margin: 0.5rem 0;
+                margin: 0.8rem 0;
             }
             
             .page-header {
@@ -290,6 +430,15 @@
             
             .page-header h1 {
                 font-size: 1.8rem;
+            }
+            
+            .quiz-section {
+                padding: 1.5rem;
+            }
+            
+            .options {
+                flex-direction: column;
+                gap: 0.8rem;
             }
         }
 
@@ -306,28 +455,45 @@
                 padding: 0 1rem;
             }
         }
+
+        @media (max-width: 480px) {
+            footer {
+                padding: 15px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Footer Styles - Updated to match index.html */
+        footer {
+            background: var(--dark-color);
+            color: var(--light-color);
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
     <nav>
         <div class="nav-container">
-            <a href="/index.html" class="nav-brand">
+            <a href="index.html" class="nav-brand">
                 <i class="fas fa-network-wired"></i>
-                Network
+                Network 
             </a>
             <button class="nav-toggle" id="navToggle">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="../pages/1.html">รูปแบบการเชื่อมต่อ</a></li>
-                <li><a href="../pages/2.html">ประเภทเครือข่าย</a></li>
-                <li><a href="../pages/3.html">อินทราเน็ต, และเอกซ์ทราเน็ต</a></li>
-                <li><a href="../pages/4.html">IEEE 802</a></li>
-                <li><a href="../pages/5.html">รูปแบบการเชื่อมต่อ</a></li>
-                <li><a href="../pages/6.html">ความเสียหาย</a></li>
+                <li><a href="./1.html" class="active">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="./2.html">ประเภทเครือข่าย</a></li>
+                <li><a href="./3.html">อินทราเน็ต,เอกซ์ทราเน็ต</a></li>
+                <li><a href="./4.html">IEEE 802</a></li>
+                <li><a href="./5.html">วิธีเชื่อมต่อ</a></li>
+                <li><a href="./6.html">ความเสียหาย</a></li>
             </ul>
         </div>
-     </nav>
+    </nav>
     <main class="page-container">
         <header class="page-header animate">
             <h1>รูปแบบการเชื่อมต่อเพื่อใช้บริการระบบเครือข่ายคอมพิวเตอร์</h1>
@@ -371,10 +537,74 @@
             </article>
         </div>
 
+        <!-- Quiz Section -->
+        <section class="quiz-section animate">
+            <div class="quiz-header">
+                <h2>แบบทดสอบวัดความเข้าใจ</h2>
+                <p>โปรดตอบคำถามต่อไปนี้โดยเลือก ใช่ หรือ ไม่</p>
+            </div>
+            
+            <form id="quiz-form" class="quiz-form">
+                <div class="question">
+                    <div class="question-text">1. เครือข่ายแบบไคลเอนต์-เซิร์ฟเวอร์มีเครื่องคอมพิวเตอร์หลักที่เรียกว่าเซิร์ฟเวอร์ทำหน้าที่ให้บริการ</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q1" value="yes">
+                            <span class="option-label">ใช่</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="no">
+                            <span class="option-label">ไม่</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">2. เครือข่ายแบบเพียร์ทูเพียร์มีเครื่องคอมพิวเตอร์ทุกเครื่องมีสิทธิ์เท่าเทียมกัน</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q2" value="yes">
+                            <span class="option-label">ใช่</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="no">
+                            <span class="option-label">ไม่</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">3. เครือข่ายแบบไคลเอนต์-เซิร์ฟเวอร์นิยมใช้ในสำนักงานขนาดเล็กเนื่องจากมีราคาถูก</div>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q3" value="yes">
+                            <span class="option-label">ใช่</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="no">
+                            <span class="option-label">ไม่</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="quiz-actions">
+                    <button type="button" id="submit-quiz" class="submit-btn">ส่งคำตอบ</button>
+                </div>
+            </form>
+            
+            <div id="quiz-result" class="result">
+                <div class="score">คะแนน: <span id="score-value">0</span>/3</div>
+                <div class="score-text" id="score-message"></div>
+            </div>
+        </section>
+
         <section class="next-page-section animate">
-            <a href="../pages/2.html" class="next-page-btn">เรียนรู้หัวข้อถัดไป →</a>
+            <a href="./2.html" class="next-page-btn">เรียนรู้หัวข้อถัดไป <i class="fas fa-arrow-right"></i></a>
         </section>
     </main>
+    <footer>
+        <p>© 2025 คุณครูวิภารัตน์ หอมอินทร์ - สาขาวิชาเทคโนโลยีธุรกิจดิจิทัล - วิทยาลัยอาชีวศึกษาร้อยเอ็ด</p>
+    </footer>
     <script>
         // Toggle mobile navigation
         document.getElementById('navToggle').addEventListener('click', function() {
@@ -408,6 +638,55 @@
             animatedElements.forEach(el => {
                 observer.observe(el);
             });
+        });
+
+        // Quiz functionality
+        document.getElementById('submit-quiz').addEventListener('click', function() {
+            // Correct answers
+            const correctAnswers = {
+                q1: 'yes',
+                q2: 'yes', 
+                q3: 'no'
+            };
+            
+            // Get user answers
+            const userAnswers = {
+                q1: document.querySelector('input[name="q1"]:checked')?.value,
+                q2: document.querySelector('input[name="q2"]:checked')?.value,
+                q3: document.querySelector('input[name="q3"]:checked')?.value
+            };
+
+            if (!userAnswers.q1 || !userAnswers.q2 || !userAnswers.q3) {
+                alert('กรุณาตอบคำถามทั้งหมดก่อนส่งคำตอบ');
+                return;
+            }
+            
+            // Calculate score
+            let score = 0;
+            if (userAnswers.q1 === correctAnswers.q1) score++;
+            if (userAnswers.q2 === correctAnswers.q2) score++;
+            if (userAnswers.q3 === correctAnswers.q3) score++;
+            
+            // Display result
+            const scoreElement = document.getElementById('score-value');
+            const scoreMessage = document.getElementById('score-message');
+            const resultElement = document.getElementById('quiz-result');
+            
+            scoreElement.textContent = score;
+            
+            // Set message based on score
+            if (score === 3) {
+                scoreMessage.textContent = 'ยอดเยี่ยม! คุณมีความเข้าใจในเนื้อหาอย่างดี';
+            } else if (score === 2) {
+                scoreMessage.textContent = 'ดี! แต่คุณควรทบทวนเนื้อหาบางส่วน';
+            } else {
+                scoreMessage.textContent = 'ควรทบทวนเนื้อหาอีกครั้งเพื่อความเข้าใจที่ดียิ่งขึ้น';
+            }
+            
+            resultElement.classList.add('show');
+            
+            // Scroll to result
+            resultElement.scrollIntoView({ behavior: 'smooth' });
         });
     </script>
 </body>

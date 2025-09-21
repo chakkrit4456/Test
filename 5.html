@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>รูปแบบการเชื่อมต่อของเครือข่ายคอมพิวเตอร์</title>
+    <title>วิธีการเชื่อมต่อของเครือข่ายคอมพิวเตอร์</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
+            /* Updated to match 4.html */
             --primary-color: #4361ee;
             --secondary-color: #3f37c9;
             --accent-color: #4895ef;
@@ -37,11 +38,10 @@
             color: #333;
             line-height: 1.6;
             min-height: 100vh;
-            padding-bottom: 2rem;
         }
 
-        /* Navigation Styles */
-         nav {
+        /* Navigation Styles - จากไฟล์ 1.html */
+        nav {
             background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
             color: white;
             padding: 0.8rem 0;
@@ -63,8 +63,8 @@
         .nav-brand {
             display: flex;
             align-items: center;
-            font-size: 1.4rem;
             font-weight: 700;
+            font-size: 1.4rem;
             text-decoration: none;
             color: white;
             transition: var(--transition);
@@ -99,13 +99,12 @@
         }
 
         .nav-links a {
-            color: white;
+            color: rgba(255, 255, 255, 0.85);
             text-decoration: none;
             font-weight: 500;
             padding: 0.5rem 0.8rem;
             border-radius: 6px;
             transition: var(--transition);
-            color: rgba(255, 255, 255, 0.85);
         }
 
         .nav-links a:hover, .nav-links a.active {
@@ -273,19 +272,37 @@
 
         .next-page-btn {
             display: inline-block;
-            padding: 1rem 2rem;
+            padding: 1rem 2.5rem;
             background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
             color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
+            font-size: 1.1rem; /* Match main.html */
             transition: var(--transition);
             box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+            position: relative; /* Match main.html */
+            overflow: hidden; /* Match main.html */
         }
 
         .next-page-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .next-page-btn::before { /* Match main.html */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .next-page-btn:hover::before { /* Match main.html */
+            left: 100%;
         }
 
         .next-page-btn i {
@@ -300,6 +317,156 @@
         /* Staggered animation delay for cards */
         .connection-type:nth-of-type(1) { animation-delay: 0.1s; }
         .connection-type:nth-of-type(2) { animation-delay: 0.2s; }
+
+        /* Footer Styles - จากไฟล์ 1.html */
+        footer {
+            background: var(--dark-color);
+            color: var(--light-color);
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            /* Added to match other files */
+            display: flex;
+            flex-direction: column;
+        }
+
+          /* Quiz Styles - เพิ่มเข้ามาใหม่ */
+        .quiz-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            margin: 3rem 0;
+            box-shadow: var(--box-shadow);
+            border-left: 5px solid var(--accent-color);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
+            animation-delay: 0.3s;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-header h2 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .quiz-header p {
+            color: var(--gray-600);
+        }
+
+        .quiz-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .question {
+            background: var(--light-color);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .options {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .option input {
+            display: none;
+        }
+
+        .option-label {
+            padding: 0.5rem 1rem;
+            background: #e9ecef;
+            border-radius: 50px;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .option input:checked + .option-label {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .quiz-actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(114, 9, 183, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(114, 9, 183, 0.4);
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            background: var(--light-color);
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .score {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .score-text {
+            margin-bottom: 1rem;
+            color: #6c757d;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-section {
+                padding: 1.5rem;
+            }
+            
+            .options {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+        }
 
         /* Responsive Design */
         @media (max-width: 992px) {
@@ -324,10 +491,10 @@
             
             .nav-links {
                 position: fixed;
-                top: 64px; /* Adjusted to match padding */
+                top: 64px;
                 left: 0;
                 right: 0;
-                background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+                background: linear-gradient(to right, var(--primary), var(--secondary));
                 flex-direction: column;
                 align-items: center;
                 padding: 1rem 0;
@@ -361,33 +528,38 @@
             .connection-info h3 {
                 font-size: 1.3rem;
             }
+            
+            footer {
+                padding: 15px;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
      <nav>
         <div class="nav-container">
-            <a href="/index.html" class="nav-brand">
+            <a href="index.html" class="nav-brand">
                 <i class="fas fa-network-wired"></i>
-                Network
+                Network 
             </a>
             <button class="nav-toggle" id="navToggle">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="../pages/1.html">รูปแบบการเชื่อมต่อ</a></li>
-                <li><a href="../pages/2.html">ประเภทเครือข่าย</a></li>
-                <li><a href="../pages/3.html">อินทราเน็ต, และเอกซ์ทราเน็ต</a></li>
-                <li><a href="../pages/4.html">IEEE 802</a></li>
-                <li><a href="../pages/5.html">รูปแบบการเชื่อมต่อ</a></li>
-                <li><a href="../pages/6.html">ความเสียหาย</a></li>
+                <li><a href="./1.html">รูปแบบการเชื่อมต่อ</a></li>
+                <li><a href="./2.html">ประเภทเครือข่าย</a></li>
+                <li><a href="./3.html">อินทราเน็ต,เอกซ์ทราเน็ต</a></li>
+                <li><a href="./4.html" >IEEE 802</a></li>
+                <li><a href="./5.html" class="active">วิธีเชื่อมต่อ</a></li>
+                <li><a href="./6.html">ความเสียหาย</a></li>
             </ul>
         </div>
      </nav>
     <main class="page-container">
         <header class="page-header">
-            <h1>รูปแบบการเชื่อมต่อของเครือข่ายคอมพิวเตอร์</h1>
-            <p>คือวิธีการที่อุปกรณ์ตั้งแต่ 2 อุปกรณ์เชื่อมต่อกันด้วยสื่อส่งข้อมูล (Transmission Link) อาจเป็นแบบมีหรือไม่มีสายก็ได้</p>
+            <h1>วิธีการเชื่อมต่อของเครือข่ายคอมพิวเตอร์</h1>
+            <p>กระบวนการที่อุปกรณ์คอมพิวเตอร์ตั้งแต่สองอุปกรณ์ขึ้นไป ทำการเชื่อมโยงกันผ่านสื่อส่งข้อมูล (Transmission Link) ซึ่งอาจอยู่ในรูปแบบสื่อแบบมีสายหรือสื่อแบบไร้สายก็ได้ </p>
         </header>
 
         <article class="content-card">
@@ -420,11 +592,126 @@
             </div>
         </article>
 
+         <!-- ส่วนแบบทดสอบที่เพิ่มเข้ามา -->
+    <section class="quiz-section">
+        <div class="quiz-header">
+            <h2>แบบทดสอบวัดความเข้าใจ</h2>
+            <p>โปรดตอบคำถามต่อไปนี้โดยเลือก ใช่ หรือ ไม่</p>
+        </div>
+        
+        <form id="quiz-form" class="quiz-form">
+            <div class="question">
+                <div class="question-text">1. การเชื่อมต่อแบบจุดต่อจุด (Point-to-Point) หมายถึงการเชื่อมต่อระหว่างอุปกรณ์สองอุปกรณ์โดยตรง</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q1" value="yes">
+                        <span class="option-label">ใช่</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="no">
+                        <span class="option-label">ไม่</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-text">2. การเชื่อมต่อแบบหลายจุด (Multi-Point) หมายถึงการเชื่อมต่อที่สื่อส่งข้อมูลหนึ่งสายสามารถเชื่อมต่อได้หลายอุปกรณ์</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q2" value="yes">
+                        <span class="option-label">ใช่</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="no">
+                        <span class="option-label">ไม่</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-text">3. การเชื่อมต่อแบบหลายจุด (Multi-Point) เหมาะสมกับการเชื่อมต่อระหว่างคอมพิวเตอร์สองเครื่องด้วยสาย USB</div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q3" value="yes">
+                        <span class="option-label">ใช่</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="no">
+                        <span class="option-label">ไม่</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="quiz-actions">
+                <button type="button" id="submit-quiz" class="submit-btn">ส่งคำตอบ</button>
+            </div>
+        </form>
+        
+        <div id="quiz-result" class="result">
+            <div class="score">คะแนน: <span id="score-value">0</span>/3</div>
+            <div class="score-text" id="score-message"></div>
+        </div>
+    </section>
+
         <section class="next-page-section">
-            <a href="../pages/6.html" class="next-page-btn">เรียนรู้หัวข้อถัดไป <i class="fas fa-arrow-right"></i></a>
+            <a href="./6.html" class="next-page-btn">เรียนรู้หัวข้อถัดไป <i class="fas fa-arrow-right"></i></a>
         </section>
+        
     </main>
+    <footer>
+        <p>© 2025 คุณครูวิภารัตน์ หอมอินทร์ - สาขาวิชาเทคโนโลยีธุรกิจดิจิทัล - วิทยาลัยอาชีวศึกษาร้อยเอ็ด</p>
+    </footer>
     <script>
+
+         document.getElementById('submit-quiz').addEventListener('click', function() {
+            // คำตอบที่ถูกต้อง
+            const correctAnswers = {
+                q1: 'yes',  // การเชื่อมต่อแบบจุดต่อจุดหมายถึงการเชื่อมต่อระหว่างอุปกรณ์สองอุปกรณ์โดยตรง - ใช่
+                q2: 'yes',  // การเชื่อมต่อแบบหลายจุดหมายถึงการเชื่อมต่อที่สื่อส่งข้อมูลหนึ่งสายสามารถเชื่อมต่อได้หลายอุปกรณ์ - ใช่
+                q3: 'no'    // การเชื่อมต่อแบบหลายจุดไม่เหมาะสมกับการเชื่อมต่อระหว่างคอมพิวเตอร์สองเครื่องด้วยสาย USB - ไม่
+            };
+            
+            // รับคำตอบจากผู้ใช้
+            const userAnswers = {
+                q1: document.querySelector('input[name="q1"]:checked')?.value,
+                q2: document.querySelector('input[name="q2"]:checked')?.value,
+                q3: document.querySelector('input[name="q3"]:checked')?.value
+            };
+
+            // ตรวจสอบว่าตอบครบทุกข้อหรือไม่
+            if (!userAnswers.q1 || !userAnswers.q2 || !userAnswers.q3) {
+                alert('กรุณาตอบคำถามทั้งหมดก่อนส่งคำตอบ');
+                return;
+            }
+            
+            // คำนวณคะแนน
+            let score = 0;
+            if (userAnswers.q1 === correctAnswers.q1) score++;
+            if (userAnswers.q2 === correctAnswers.q2) score++;
+            if (userAnswers.q3 === correctAnswers.q3) score++;
+            
+            // แสดงผลลัพธ์
+            const scoreElement = document.getElementById('score-value');
+            const scoreMessage = document.getElementById('score-message');
+            const resultElement = document.getElementById('quiz-result');
+            
+            scoreElement.textContent = score;
+            
+            // ตั้งข้อความตามคะแนน
+            if (score === 3) {
+                scoreMessage.textContent = 'ยอดเยี่ยม! คุณมีความเข้าใจในเนื้อหาอย่างดี';
+            } else if (score === 2) {
+                scoreMessage.textContent = 'ดี! แต่คุณควรทบทวนเนื้อหาบางส่วน';
+            } else {
+                scoreMessage.textContent = 'ควรทบทวนเนื้อหาอีกครั้งเพื่อความเข้าใจที่ดียิ่งขึ้น';
+            }
+            
+            resultElement.classList.add('show');
+            
+            // เลื่อนไปยังผลลัพธ์
+            resultElement.scrollIntoView({ behavior: 'smooth' });
+        });
+
         // Toggle mobile navigation
         document.getElementById('navToggle').addEventListener('click', function() {
             document.getElementById('navLinks').classList.toggle('active');
